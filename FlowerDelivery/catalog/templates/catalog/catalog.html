@@ -1,0 +1,10 @@
+<h2>Каталог</h2>
+<ul>
+    {% for product in products %}
+    <li>
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        <p>{{ product.name }}</p>
+        <p>{{ product.price }}</p>
+    </li>
+    {% endfor %}
+</ul>

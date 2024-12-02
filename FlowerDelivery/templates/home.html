@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowersDelivery</title>
+
+    <!-- Подключение файла стилей -->
+    <link rel="stylesheet" href="/static/css/styles.css">
+
+    <!-- Подключение шрифта Magnolia Italic -->
+    <style>
+        /* Подключение шрифта Magnolia Italic */
+        @font-face {
+            font-family: 'Magnolia Italic'; /* Новое */
+            src: url('/static/fonts/Magnolia-Italic.woff2') format('woff2'), /* Новое */
+                 url('/static/fonts/Magnolia-Italic.woff') format('woff');   /* Новое */
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        /* Основные стили */
+        body {
+            margin: 0;
+            font-family: 'Magnolia Italic', Arial, sans-serif; /* Новое */
+        }
+
+        /* Шапка */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #f8f9fa;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header .left, .header .right {
+            display: flex;
+            gap: 15px;
+        }
+
+        .header .right {
+            position: relative;
+            right: 45px; /* Сдвиг вправо для центровки */
+        }
+
+        .header .logo {
+            font-size: 34px;
+            font-family: 'Magnolia Italic', cursive; /* Новое */
+            color: #FF3366;
+        }
+
+        .header a {
+            text-decoration: none;
+            color: #FF3366;
+            font-weight: bold;
+            font-family: 'Magnolia Italic', cursive; /* Новое */
+        }
+
+        .header a:hover {
+            text-decoration: underline;
+        }
+
+        /* Основная картинка */
+        .main-image {
+            position: relative;
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .main-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Текст поверх изображения */
+        .overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            font-family: 'Magnolia Italic', cursive; /* Новое */
+            animation: fadeIn 3s ease-out;
+        }
+
+        .overlay h1 {
+            font-size: 60px;
+            margin: 0;
+            text-shadow: 2px 2px 10px rgba(255, 51, 102, 0.8);
+            animation: glow 3s infinite alternate;
+        }
+
+        .overlay p {
+            font-size: 30px;
+            margin-top: 10px;
+            text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.8);
+            animation: moveUp 2s ease-out 1s;
+        }
+
+        /* Анимации */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 2px 2px 10px rgba(255, 51, 102, 0.8);
+            }
+            to {
+                text-shadow: 2px 2px 20px rgba(255, 255, 255, 1);
+            }
+        }
+
+        @keyframes moveUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <div class="header">
+        <div class="left">
+            <a href="#">О нас</a>
+            <a href="/catalog/">Каталог товаров</a>
+        </div>
+        <div class="logo">
+            FlowersDelivery
+        </div>
+        <div class="right">
+            <a href="/users/register/">Регистрация</a>
+            <a href="/users/login/">Вход</a>
+        </div>
+    </div>
+
+    <!-- Основной контент -->
+    <div class="main-image">
+        <img src="https://sp-vestniksadovoda.ru/files/59d/59d7431a654905cba688ac322035c75c.jpg" alt="Цветы">
+        <div class="overlay">
+            <h1>Гипермаркет цветов</h1>
+            <p>Новая коллекция уже в продаже</p>
+        </div>
+    </div>
+</body>
+</html>
+
+

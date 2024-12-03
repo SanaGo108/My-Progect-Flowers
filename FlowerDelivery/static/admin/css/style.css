@@ -1,0 +1,77 @@
+@font-face {
+    font-family: 'Dancing Script';
+    src: url('/static/fonts/DancingScript-Regular.woff2') format('woff2'),
+         url('/static/fonts/DancingScript-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Общий стиль */
+/* Общий стиль */
+body {
+    font-family: 'Dancing Script', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+h1, h2, h3, p {
+    font-family: 'Dancing Script', cursive;
+}
+
+/* Шапка */
+.header {
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.header a {
+    text-decoration: none;
+    color: #FF3366;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+/* Подвал */
+.footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid #ddd;
+}
+
+/* Сетка продуктов */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 100px 20px;
+}
+
+.product-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+}
+
+.add-to-cart {
+    padding: 10px 20px;
+    background-color: #FF3366;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}

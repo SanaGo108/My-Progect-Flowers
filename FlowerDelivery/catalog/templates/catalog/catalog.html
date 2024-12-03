@@ -1,10 +1,19 @@
-<h2>Каталог</h2>
-<ul>
+{% extends "base.html" %}
+
+{% block title %}Каталог{% endblock %}
+
+{% block content %}
+<div class="product-grid">
     {% for product in products %}
-    <li>
+    <div class="product-card">
         <img src="{{ product.image.url }}" alt="{{ product.name }}">
-        <p>{{ product.name }}</p>
-        <p>{{ product.price }}</p>
-    </li>
+        <div class="product-info">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <p><strong>{{ product.price }} руб.</strong></p>
+            <a href="#" class="add-to-cart">В корзину</a>
+        </div>
+    </div>
     {% endfor %}
-</ul>
+</div>
+{% endblock %}

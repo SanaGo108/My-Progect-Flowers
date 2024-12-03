@@ -6,23 +6,21 @@
     <title>FlowersDelivery</title>
 
     <!-- Подключение файла стилей -->
-    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/admin/css/styles.css">
 
-    <!-- Подключение шрифта Magnolia Italic -->
+    <!-- Подключение шрифта -->
     <style>
-        /* Подключение шрифта Magnolia Italic */
         @font-face {
-            font-family: 'Magnolia Italic'; /* Новое */
-            src: url('/static/fonts/Magnolia-Italic.woff2') format('woff2'), /* Новое */
-                 url('/static/fonts/Magnolia-Italic.woff') format('woff');   /* Новое */
+            font-family: 'Dancing Script';
+            src: url('/static/fonts/DancingScript-Regular.woff2') format('woff2'),
+                 url('/static/fonts/DancingScript-Regular.woff') format('woff');
             font-weight: normal;
-            font-style: italic;
+            font-style: normal;
         }
 
-        /* Основные стили */
         body {
+            font-family: 'Dancing Script', Arial, sans-serif;
             margin: 0;
-            font-family: 'Magnolia Italic', Arial, sans-serif; /* Новое */
         }
 
         /* Шапка */
@@ -45,12 +43,12 @@
 
         .header .right {
             position: relative;
-            right: 45px; /* Сдвиг вправо для центровки */
+            right: 45px;
         }
 
         .header .logo {
             font-size: 34px;
-            font-family: 'Magnolia Italic', cursive; /* Новое */
+            font-family: 'Dancing Script', cursive;
             color: #FF3366;
         }
 
@@ -58,7 +56,7 @@
             text-decoration: none;
             color: #FF3366;
             font-weight: bold;
-            font-family: 'Magnolia Italic', cursive; /* Новое */
+            font-family: 'Dancing Script', cursive;
         }
 
         .header a:hover {
@@ -82,57 +80,71 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) scale(0.8);
+            opacity: 0;
             text-align: center;
             color: white;
-            font-family: 'Magnolia Italic', cursive; /* Новое */
-            animation: fadeIn 3s ease-out;
+            font-family: 'Dancing Script', cursive;
+            animation: popFromDepth 2s ease-out forwards;
         }
 
         .overlay h1 {
             font-size: 60px;
             margin: 0;
             text-shadow: 2px 2px 10px rgba(255, 51, 102, 0.8);
-            animation: glow 3s infinite alternate;
         }
 
         .overlay p {
             font-size: 30px;
             margin-top: 10px;
             text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.8);
-            animation: moveUp 2s ease-out 1s;
         }
 
-        /* Анимации */
-        @keyframes fadeIn {
-            from {
+        @keyframes popFromDepth {
+            0% {
+                transform: translate(-50%, -50%) scale(0.8);
                 opacity: 0;
-                transform: translate(-50%, -60%);
             }
-            to {
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
                 opacity: 1;
-                transform: translate(-50%, -50%);
             }
         }
 
-        @keyframes glow {
-            from {
-                text-shadow: 2px 2px 10px rgba(255, 51, 102, 0.8);
-            }
-            to {
-                text-shadow: 2px 2px 20px rgba(255, 255, 255, 1);
-            }
+        /* Подвал */
+        .footer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #FF3366;
         }
 
-        @keyframes moveUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .footer p {
+            font-size: 14px;
+            color: #FF3366;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .social-icons .icon img {
+            width: 40px;
+            height: 40px;
+            transition: transform 0.3s;
+        }
+
+        .social-icons .icon img:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
@@ -160,7 +172,21 @@
             <p>Новая коллекция уже в продаже</p>
         </div>
     </div>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="social-icons">
+            <a href="https://vk.com" target="_blank" class="icon">
+                <img src="/static/icons/vk.svg" alt="ВКонтакте">
+            </a>
+            <a href="https://zen.yandex.ru" target="_blank" class="icon">
+                <img src="/static/icons/zen.svg" alt="Дзен">
+            </a>
+            <a href="https://t.me" target="_blank" class="icon">
+                <img src="/static/icons/telegram.svg" alt="Telegram">
+            </a>
+        </div>
+        <p>&copy; 2024 FlowersDelivery. Все права защищены.</p>
+    </footer>
 </body>
 </html>
-
-

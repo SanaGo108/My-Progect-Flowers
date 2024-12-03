@@ -1,0 +1,38 @@
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    overflow: hidden;
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+}
+
+.product-info {
+    padding: 10px;
+}
+
+.add-to-cart {
+    display: block;
+    margin-top: 10px;
+    background-color: #FF3366;
+    color: #fff;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.add-to-cart:hover {
+    background-color: #e22b5c;
+}

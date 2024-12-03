@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}FlowersDelivery{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="left">
+            <a href="#">О нас</a>
+            <a href="/catalog/">Каталог товаров</a>
+        </div>
+        <div class="logo">FlowersDelivery</div>
+        <div class="right">
+            <a href="/users/register/">Регистрация</a>
+            <a href="/users/login/">Вход</a>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="social-icons">
+            <a href="https://vk.com" target="_blank" class="icon">
+                <img src="{% static 'icons/vk.svg' %}" alt="ВКонтакте">
+            </a>
+            <a href="https://zen.yandex.ru" target="_blank" class="icon">
+                <img src="{% static 'icons/zen.svg' %}" alt="Дзен">
+            </a>
+            <a href="https://t.me" target="_blank" class="icon">
+                <img src="{% static 'icons/telegram.svg' %}" alt="Telegram">
+            </a>
+        </div>
+        <p>&copy; 2024 FlowersDelivery. Все права защищены.</p>
+    </footer>
+</body>
+</html>

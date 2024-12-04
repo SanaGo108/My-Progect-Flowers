@@ -1,19 +1,36 @@
 {% extends "base.html" %}
 
-{% block title %}Каталог{% endblock %}
+{% block title %}Каталог товаров{% endblock %}
 
 {% block content %}
-<div class="product-grid">
-    {% for product in products %}
-    <div class="product-card">
-        <img src="{{ product.image.url }}" alt="{{ product.name }}">
-        <div class="product-info">
-            <h3>{{ product.name }}</h3>
-            <p>{{ product.description }}</p>
-            <p><strong>{{ product.price }} руб.</strong></p>
-            <a href="#" class="add-to-cart">В корзину</a>
+<div class="container py-5">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for product in products %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="text-danger fw-bold">{{ product.price }} руб.</p>
+                    <div class="input-group mb-3">
+                        <button class="btn btn-outline-secondary btn-sm" type="button">-</button>
+                        <input type="text" class="form-control text-center" value="1" style="width: 60px;">
+                        <button class="btn btn-outline-secondary btn-sm" type="button">+</button>
+                    </div>
+                    <button class="btn btn-primary w-100">В корзину</button>
+                </div>
+            </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 {% endblock %}
+
+<footer class="footer bg-light py-3 text-center">
+    <div class="container">
+        <div class="social-icons">
+            <!-- Значки -->
+        </div>
+        <p>&copy; 2024 FlowersDelivery. Все права защищены.</p>
+    </div>
+</footer>

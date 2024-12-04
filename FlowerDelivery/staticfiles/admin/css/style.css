@@ -7,7 +7,6 @@
 }
 
 /* Общий стиль */
-/* Общий стиль */
 body {
     font-family: 'Dancing Script', Arial, sans-serif;
     margin: 0;
@@ -17,6 +16,7 @@ body {
 
 h1, h2, h3, p {
     font-family: 'Dancing Script', cursive;
+    font-size: 20px; /* Добавлено ; */
 }
 
 /* Шапка */
@@ -31,13 +31,23 @@ h1, h2, h3, p {
     top: 0;
     width: 100%;
     z-index: 1000;
+    color: #FF3366;
+    font-size: 20px;
 }
 
 .header a {
     text-decoration: none;
     color: #FF3366;
     font-weight: bold;
-    margin: 0 10px;
+    margin: 0 40px;
+}
+
+.catalog-page .header .logo {
+    font-size: 40px; /* Логотип крупнее */
+}
+
+.catalog-page .header a {
+    font-size: 20px; /* Ссылки крупнее */
 }
 
 /* Подвал */
@@ -46,6 +56,28 @@ h1, h2, h3, p {
     padding: 20px 0;
     text-align: center;
     border-top: 1px solid #ddd;
+    color: #FF3366;
+}
+
+.footer .social-icons .icon img {
+    width: 20px; /* Размер иконок */
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+.footer .social-icons .icon img:hover {
+    transform: scale(1.2); /* Эффект увеличения */
+}
+
+.card-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.25rem;
+}
+
+.card-text {
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem;
+    color: #555;
 }
 
 /* Сетка продуктов */
@@ -74,4 +106,48 @@ h1, h2, h3, p {
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
+}
+
+/* Регистрационная форма */
+.registration-form {
+    background-color: #ffe6f2;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 50px auto;
+}
+
+.registration-form label {
+    font-size: 14px;
+    color: #333;
+}
+
+.registration-form input {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.registration-form button {
+    background-color: #FF3366;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.registration-form button:hover {
+    background-color: #e22b5c;
+}
+
+@media (max-width: 768px) {
+    .registration-form {
+        max-width: 100%; /* На мобильных устройствах занимает всю ширину */
+        padding: 30px; /* Снижает внутренний отступ */
+    }
 }

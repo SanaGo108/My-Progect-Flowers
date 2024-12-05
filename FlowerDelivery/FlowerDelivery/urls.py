@@ -4,7 +4,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.shortcuts import render
 
-from FlowerDelivery.users.views import dashboard
 
 
 # Представление для главной страницы

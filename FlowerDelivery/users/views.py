@@ -28,4 +28,4 @@ def dashboard(request):
     Показывает историю заказов текущего пользователя.
     """
     orders = Order.objects.filter(user=request.user).order_by('-created_at')
-    return render(request, 'users/dashboard.html', {'orders': orders})
+    return render(request, 'users/templates/users/dashboard.html', {'orders': orders})

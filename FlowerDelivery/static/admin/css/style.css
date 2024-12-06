@@ -151,3 +151,58 @@ h1, h2, h3, p {
         padding: 30px; /* Снижает внутренний отступ */
     }
 }
+
+.main-image {
+    position: relative;
+    margin-top: 80px;
+    text-align: center;
+}
+
+.main-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+    text-align: center;
+    color: white;
+    font-family: 'Dancing Script', cursive;
+    animation: popFromDepth 2s ease-out forwards;
+}
+
+.overlay h1 {
+    font-size: 60px;
+    margin: 0;
+    color: #FF3366; /* Розовый цвет текста */
+    text-shadow: 0 0 15px rgba(255, 223, 0, 0.8), 0 0 30px rgba(255, 223, 0, 0.5); /* Бледно-жёлтая подсветка */
+    animation: textGlow 1.5s ease-in-out infinite alternate; /* Анимация подсветки */
+}
+
+.overlay p {
+    font-size: 30px;
+    margin-top: 10px;
+    color: #FF3366; /* Розовый цвет текста */
+    text-shadow: 0 0 10px rgba(255, 223, 0, 0.8), 0 0 20px rgba(255, 223, 0, 0.5); /* Бледно-жёлтая подсветка */
+}
+
+
+
+@keyframes popFromDepth {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}

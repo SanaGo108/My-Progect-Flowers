@@ -1,192 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlowersDelivery</title>
+{% extends "base.html" %}
 
-    <!-- Подключение файла стилей -->
-    <link rel="stylesheet" href="/static/admin/css/style.css">
+{% block title %}Главная страница{% endblock %}
 
-    <!-- Подключение шрифта -->
-    <style>
-        @font-face {
-            font-family: 'Dancing Script';
-            src: url('/static/fonts/DancingScript-Regular.woff2') format('woff2'),
-                 url('/static/fonts/DancingScript-Regular.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
+{% block content %}
+<style>
+    /* Контейнер изображения */
+    .main-image {
+        position: relative;
+        text-align: center;
+        overflow: hidden;
+    }
 
-        body {
-            font-family: 'Dancing Script', Arial, sans-serif;
-            margin: 0;
-        }
+    .main-image img {
+        width: 100%;
+        height: auto;
+    }
 
-        /* Шапка */
-        .header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: #f8f9fa;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+    /* Слой текста поверх изображения */
+    .overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.8); /* Начальная позиция и масштаб */
+        opacity: 0; /* Начальная прозрачность */
+        text-align: center;
+        color: #FFD700; /* Бледно-желтый цвет текста */
+        font-family: 'Dancing Script', cursive;
+        animation: fadeInScale 2s ease-out forwards; /* Анимация появления текста */
+    }
 
-        .header .left, .header .right {
-            display: flex;
-            gap: 15px;
-        }
+    .overlay h1 {
+    font-size: 60px;
+    margin: 0;
+    color: #FF3366; /* Розовый цвет текста */
+    text-shadow: 0 0 15px rgba(255, 223, 0, 0.8), 0 0 30px rgba(255, 223, 0, 0.5); /* Бледно-жёлтая подсветка */
+    animation: textGlow 1.5s ease-in-out infinite alternate; /* Анимация подсветки */
+    }
 
-        .header .right {
-            position: relative;
-            right: 45px;
-        }
+    .overlay p {
+    font-size: 30px;
+    margin-top: 10px;
+    color: #FF3366; /* Розовый цвет текста */
+    text-shadow: 0 0 10px rgba(255, 223, 0, 0.8), 0 0 20px rgba(255, 223, 0, 0.5); /* Бледно-жёлтая подсветка */
+    }
 
-        .header .logo {
-            font-size: 34px;
-            font-family: 'Dancing Script', cursive;
-            color: #FF3366;
-        }
 
-        .header a {
-            text-decoration: none;
-            color: #FF3366;
-            font-weight: bold;
-            font-family: 'Dancing Script', cursive;
-        }
-
-        .header a:hover {
-            text-decoration: underline;
-        }
-
-        /* Основная картинка */
-        .main-image {
-            position: relative;
-            margin-top: 80px;
-            text-align: center;
-        }
-
-        .main-image img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        /* Текст поверх изображения */
-        .overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
+    /* Анимация появления текста */
+    @keyframes fadeInScale {
+        0% {
             transform: translate(-50%, -50%) scale(0.8);
             opacity: 0;
-            text-align: center;
-            color: white;
-            font-family: 'Dancing Script', cursive;
-            animation: popFromDepth 2s ease-out forwards;
         }
+        50% {
+            transform: translate(-50%, -50%) scale(1.1);
+            opacity: 0.7;
+        }
+        100% {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+    }
 
-        .overlay h1 {
-            font-size: 60px;
-            margin: 0;
-            text-shadow: 2px 2px 10px rgba(255, 51, 102, 0.8);
+    /* Анимация подсветки текста */
+    @keyframes textGlow {
+        0% {
+            text-shadow: 0 0 10px rgba(255, 223, 0, 0.5), 0 0 20px rgba(255, 223, 0, 0.5);
         }
+        100% {
+            text-shadow: 0 0 20px rgba(255, 223, 0, 0.8), 0 0 40px rgba(255, 223, 0, 1);
+        }
+    }
+</style>
 
-        .overlay p {
-            font-size: 30px;
-            margin-top: 10px;
-            text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.8);
-        }
-
-        @keyframes popFromDepth {
-            0% {
-                transform: translate(-50%, -50%) scale(0.8);
-                opacity: 0;
-            }
-            50% {
-                transform: translate(-50%, -50%) scale(1.1);
-                opacity: 0.7;
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(1);
-                opacity: 1;
-            }
-        }
-
-        /* Подвал */
-        .footer {
-            background-color: #f8f9fa;
-            padding: 20px;
-            text-align: center;
-            margin-top: 20px;
-            border-top: 1px solid #ddd;
-            color: #FF3366;
-        }
-
-        .footer p {
-            font-size: 14px;
-            color: #FF3366;
-        }
-
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 10px;
-        }
-
-        .social-icons .icon img {
-            width: 45px;
-            height: 45px;
-            transition: transform 0.3s;
-        }
-
-        .social-icons .icon img:hover {
-            transform: scale(1.1);
-        }
-    </style>
-</head>
-<body>
-    <!-- Шапка -->
-    <div class="header">
-        <div class="left">
-            <a href="{% url 'dashboard' %}">Личный кабинет</a>
-            <a href="/catalog/">Каталог товаров</a>
-        </div>
-        <div class="logo">
-            FlowersDelivery
-        </div>
-        <div class="right">
-            <a href="/users/register/">Регистрация</a>
-            <a href="/users/login/">Вход</a>
-        </div>
+<div class="main-image">
+    <img src="https://sp-vestniksadovoda.ru/files/59d/59d7431a654905cba688ac322035c75c.jpg" alt="Цветы">
+    <div class="overlay">
+        <h1>Гипермаркет цветов</h1>
+        <p>Новая коллекция уже в продаже</p>
     </div>
-
-    <!-- Основной контент -->
-    <div class="main-image">
-        <img src="https://sp-vestniksadovoda.ru/files/59d/59d7431a654905cba688ac322035c75c.jpg" alt="Цветы">
-        <div class="overlay">
-            <h1>Гипермаркет цветов</h1>
-            <p>Новая коллекция уже в продаже</p>
-        </div>
-    </div>
-
-    <!-- Подвал -->
-    <footer class="footer">
-        <div class="social-icons">
-            <a href="https://vk.com" target="_blank" class="icon">
-                <img src="/static/icons/vk.svg" alt="ВКонтакте">
-            </a>
-            <a href="https://zen.yandex.ru" target="_blank" class="icon">
-                <img src="/static/icons/zen.svg" alt="Дзен">
-            </a>
-            <a href="https://t.me" target="_blank" class="icon">
-                <img src="/static/icons/telegram.svg" alt="Telegram">
-            </a>
-        </div>
-        <p>&copy; 2024 FlowersDelivery. Все права защищены.</p>
-    </footer>
-</body>
-</html>
+</div>
+{% endblock %}

@@ -4,23 +4,23 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.shortcuts import render
 from django.contrib.auth import views as auth_views
-from users.views import dashboard  # Убедитесь, что этот метод существует
+from users.views import dashboard
+from orders.views import cart  # Импорт для прямого маршрута корзины
 
-# Представление для главной страницы
 def home(request):
     return render(request, 'home.html', {'current_page': 'home'})
 
 urlpatterns = [
-    path('admin/', admin.site.urls),  # Административный интерфейс
-    path('users/', include('users.urls')),  # URL-ы приложения users
-    path('catalog/', include('catalog.urls')),  # URL-ы приложения catalog
-    path('orders/', include('orders.urls')),  # URL-ы приложения orders
-    path('reviews/', include('reviews.urls')),  # URL-ы приложения reviews
-    path('analytics/', include('analytics.urls')),  # URL-ы приложения analytics
-    path('dashboard/', dashboard, name='dashboard'),  # Личный кабинет
-    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),  # Маршрут для входа
-    path('', home, name='home'),  # Главная страница
-    path('', include('catalog.urls')),  # Например, для главной страницы
+    path('admin/', admin.site.urls),
+    path('users/', include('users.urls')),
+    path('catalog/', include('catalog.urls')),
+    path('orders/', include('orders.urls')),
+    path('reviews/', include('reviews.urls')),
+    path('analytics/', include('analytics.urls')),
+    path('dashboard/', dashboard, name='dashboard'),
+    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
+    path('cart/', cart, name='cart'),  # Прямой маршрут для корзины
+    path('', home, name='home'),
 ]
 
 if settings.DEBUG:

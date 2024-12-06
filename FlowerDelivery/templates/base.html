@@ -43,9 +43,10 @@
         .header .logo {
             flex-grow: 1;
             text-align: center;
-            font-size: 24px;
+            font-size: 36px;
             font-weight: bold;
             color: #FF3366;
+            margin-left: -140px; /* Сдвиг влево */
         }
 
         .header a {
@@ -84,24 +85,29 @@
     <!-- Шапка -->
     <div class="header">
         <div class="left">
-            {% if current_page in "home catalog cart" %}
+            {% if current_page == "home" %}
+                <a href="{% url 'catalog' %}">Каталог товаров</a>
+                <a href="{% url 'dashboard' %}">Личный кабинет</a>
+                <a href="{% url 'cart' %}">Корзина</a>
+            {% elif current_page == "catalog" %}
                 <a href="{% url 'home' %}">Главная</a>
                 <a href="{% url 'dashboard' %}">Личный кабинет</a>
                 <a href="{% url 'cart' %}">Корзина</a>
+            {% elif current_page == "cart" %}
+                <a href="{% url 'home' %}">Главная</a>
+                <a href="{% url 'catalog' %}">Каталог товаров</a>
             {% endif %}
         </div>
         <div class="logo">
             FlowersDelivery
         </div>
         <div class="right">
-            {% if current_page == "home" %}
-                <a href="{% url 'register' %}">Регистрация</a>
-                <a href="{% url 'login' %}">Вход</a>
-            {% elif current_page in "catalog login" %}
+            {% if current_page in "home catalog" %}
                 <a href="{% url 'register' %}">Регистрация</a>
                 <a href="{% url 'login' %}">Вход</a>
             {% elif current_page == "cart" %}
-                <a href="{% url 'catalog' %}">Каталог товаров</a>
+                <a href="{% url 'register' %}">Регистрация</a>
+                <a href="{% url 'login' %}">Вход</a>
             {% endif %}
         </div>
     </div>
@@ -131,3 +137,4 @@
     {% block scripts %}{% endblock %}
 </body>
 </html>
+

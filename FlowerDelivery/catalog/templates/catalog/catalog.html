@@ -3,27 +3,72 @@
 {% block title %}Каталог товаров{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        {% for product in products %}
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
-                <div class="card-body text-center">
-                    <h5 class="card-title">{{ product.name }}</h5>
-                    <p class="text-danger fw-bold">{{ product.price }} руб.</p>
-                    <div class="input-group mb-3">
-                        <button class="btn btn-outline-secondary btn-sm" type="button">-</button>
-                        <input type="text" class="form-control text-center" value="1" style="width: 60px;">
-                        <button class="btn btn-outline-secondary btn-sm" type="button">+</button>
+<style>
+    .content-background {
+        background-image: url('https://sp-vestniksadovoda.ru/files/59d/59d7431a654905cba688ac322035c75c.jpg');
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+        padding: 50px 0; /* Пространство для содержимого */
+    }
+
+    .content-background .container {
+        background-color: rgba(255, 255, 255, 0.5); /* Полупрозрачный белый фон для контента */
+        border-radius: 15px;
+        padding: 30px;
+    }
+
+    .quantity-input {
+        width: 60px;
+        text-align: center;
+    }
+</style>
+
+<div class="content-background">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for product in products %}
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="text-danger fw-bold">{{ product.price }} руб.</p>
+                        <div class="input-group mb-3">
+                            <button class="btn btn-outline-secondary btn-sm decrement-btn" type="button">-</button>
+                            <input type="number" class="form-control quantity-input" value="1" min="1">
+                            <button class="btn btn-outline-secondary btn-sm increment-btn" type="button">+</button>
+                        </div>
+                        <button class="btn btn-primary w-100">В корзину</button>
                     </div>
-                    <button class="btn btn-primary w-100">В корзину</button>
                 </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Обработчик для кнопок увеличения количества
+        document.querySelectorAll('.increment-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const input = this.previousElementSibling;
+                input.value = parseInt(input.value) + 1;
+            });
+        });
+
+        // Обработчик для кнопок уменьшения количества
+        document.querySelectorAll('.decrement-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const input = this.nextElementSibling;
+                if (parseInt(input.value) > 1) {
+                    input.value = parseInt(input.value) - 1;
+                }
+            });
+        });
+    });
+</script>
 {% endblock %}
 
 <footer class="footer bg-light py-3 text-center">
@@ -34,3 +79,4 @@
         <p>&copy; 2024 FlowersDelivery. Все права защищены.</p>
     </div>
 </footer>
+

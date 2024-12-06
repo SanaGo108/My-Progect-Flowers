@@ -10,3 +10,6 @@ def create_order(request):
         order.products.set(products)
         return redirect('order_history')
     return render(request, 'orders/orders.html', {'products': Product.objects.all()})
+
+def cart(request):
+    return render(request, 'orders/cart.html', {'current_page': 'cart'})

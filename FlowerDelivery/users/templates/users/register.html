@@ -16,16 +16,16 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: url('https://avatars.mds.yandex.net/i?id=30a4cc8557435d29e4633dced1b244f54a3b3547-12605974-images-thumbs&n=13') no-repeat center center fixed;
+            background: url('https://sp-vestniksadovoda.ru/files/59d/59d7431a654905cba688ac322035c75c.jpg') no-repeat center center fixed;
             background-size: cover;
         }
         .registration-form {
-            background: #ffe6f2;
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
-            padding: 40px; /* Внутренний отступ */
+            padding: 40px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             width: 100%;
-            max-width: 800px;
+            max-width: 600px;
         }
         .registration-form h2 {
             color: #ff6699;
@@ -42,7 +42,7 @@
             border-color: #e65585;
         }
         .form-label {
-            font-size: 0.9rem; /* Уменьшенный шрифт для описания */
+            font-size: 0.9rem;
             color: #333;
         }
         .form-control {
@@ -52,48 +52,54 @@
             border-color: #e65585;
             box-shadow: 0 0 0 0.2rem rgba(255, 102, 153, 0.25);
         }
+        .alert {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="registration-form">
         <h2>Регистрация</h2>
+        <!-- Если есть ошибки в форме, отображаем их -->
+        {% if form.errors %}
+        <div class="alert alert-danger">
+            <ul>
+                {% for field, errors in form.errors.items %}
+                    <li><strong>{{ field }}:</strong> {{ errors|join:", " }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
         <form method="post" action="{% url 'register' %}">
             {% csrf_token %}
-            <div class="row mb-3">
-                <div class="col-6">
-                    <label for="id_username" class="form-label">Имя пользователя</label>
-                    <input type="text" id="id_username" name="username" class="form-control" placeholder="Введите имя пользователя">
-                </div>
-                <div class="col-6">
-                    <label for="id_email" class="form-label">Email</label>
-                    <input type="email" id="id_email" name="email" class="form-control" placeholder="Введите email">
-                </div>
+            <div class="mb-3">
+                <label for="id_username" class="form-label">Имя пользователя</label>
+                <input type="text" id="id_username" name="username" class="form-control" placeholder="Введите имя пользователя" required>
             </div>
-            <div class="row mb-3">
-                <div class="col-6">
-                    <label for="id_phone" class="form-label">Телефон</label>
-                    <input type="text" id="id_phone" name="phone" class="form-control" placeholder="Введите номер телефона">
-                </div>
-                <div class="col-6">
-                    <label for="id_address" class="form-label">Адрес</label>
-                    <input type="text" id="id_address" name="address" class="form-control" placeholder="Введите адрес">
-                </div>
+            <div class="mb-3">
+                <label for="id_email" class="form-label">Email</label>
+                <input type="email" id="id_email" name="email" class="form-control" placeholder="Введите email" required>
             </div>
-            <div class="row mb-3">
-                <div class="col-6">
-                    <label for="id_password1" class="form-label">Пароль</label>
-                    <input type="password" id="id_password1" name="password1" class="form-control" placeholder="Введите пароль">
-                </div>
-                <div class="col-6">
-                    <label for="id_password2" class="form-label">Подтверждение пароля</label>
-                    <input type="password" id="id_password2" name="password2" class="form-control" placeholder="Повторите пароль">
-                </div>
+            <div class="mb-3">
+                <label for="id_phone" class="form-label">Телефон</label>
+                <input type="text" id="id_phone" name="phone" class="form-control" placeholder="Введите номер телефона">
             </div>
-            <button type="submit" class="btn btn-primary w-100 mt-3">Зарегистрироваться</button>
+            <div class="mb-3">
+                <label for="id_address" class="form-label">Адрес</label>
+                <input type="text" id="id_address" name="address" class="form-control" placeholder="Введите адрес">
+            </div>
+            <div class="mb-3">
+                <label for="id_password1" class="form-label">Пароль</label>
+                <input type="password" id="id_password1" name="password1" class="form-control" placeholder="Введите пароль" required>
+            </div>
+            <div class="mb-3">
+                <label for="id_password2" class="form-label">Подтверждение пароля</label>
+                <input type="password" id="id_password2" name="password2" class="form-control" placeholder="Повторите пароль" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Зарегистрироваться</button>
         </form>
     </div>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-

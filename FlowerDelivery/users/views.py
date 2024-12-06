@@ -3,6 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm
 from orders.models import Order  # Импорт модели заказов
+from django.db import connection
 
 def register(request):
     """
@@ -21,11 +22,7 @@ def register(request):
     return render(request, 'users/register.html', {'form': form})
 
 
-@login_required
 def dashboard(request):
-    """
-    Представление для личного кабинета пользователя.
-    Показывает историю заказов текущего пользователя.
-    """
-    orders = Order.objects.filter(user=request.user).order_by('-created_at')
-    return render(request, 'users/templates/users/dashboard.html', {'orders': orders})
+    orders = request.user.orders.all()
+    print(connection.queries)  # Показывает все SQL-запросы
+    return render(request, 'users/dashboard.html', {'orders': orders})

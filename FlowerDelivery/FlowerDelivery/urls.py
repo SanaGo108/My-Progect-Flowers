@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.contrib.auth import views as auth_views
 from users.views import dashboard
 from orders.views import cart  # Импорт для прямого маршрута корзины
+from django.contrib.auth.views import LogoutView
 
 def home(request):
     return render(request, 'home.html', {'current_page': 'home'})
@@ -14,11 +15,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
     path('catalog/', include('catalog.urls')),
-    path('orders/', include('orders.urls')),
+#    path('orders/', include('orders.urls')),
     path('reviews/', include('reviews.urls')),
     path('analytics/', include('analytics.urls')),
     path('dashboard/', dashboard, name='dashboard'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
     path('cart/', cart, name='cart'),  # Прямой маршрут для корзины
     path('', home, name='home'),
 ]

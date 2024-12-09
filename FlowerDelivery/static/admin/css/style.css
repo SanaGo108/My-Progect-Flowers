@@ -16,7 +16,7 @@ body {
 
 h1, h2, h3, p {
     font-family: 'Dancing Script', cursive;
-    font-size: 20px; /* Добавлено ; */
+    font-size: 20px;
 }
 
 /* Шапка */
@@ -42,12 +42,16 @@ h1, h2, h3, p {
     margin: 0 40px;
 }
 
+.header a.btn:hover {
+    text-decoration: underline !important;
+}
+
 .catalog-page .header .logo {
-    font-size: 40px; /* Логотип крупнее */
+    font-size: 40px;
 }
 
 .catalog-page .header a {
-    font-size: 20px; /* Ссылки крупнее */
+    font-size: 20px;
 }
 
 /* Подвал */
@@ -60,52 +64,94 @@ h1, h2, h3, p {
 }
 
 .footer .social-icons .icon img {
-    width: 20px; /* Размер иконок */
+    width: 20px;
     height: 20px;
     transition: transform 0.3s ease;
 }
 
 .footer .social-icons .icon img:hover {
-    transform: scale(1.2); /* Эффект увеличения */
+    transform: scale(1.2);
 }
 
-.card-title {
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.25rem;
-}
-
-.card-text {
-    font-family: Arial, sans-serif;
-    font-size: 0.9rem;
-    color: #555;
-}
-
-/* Сетка продуктов */
-.product-grid {
+/* Карточки товаров */
+.catalog-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    padding: 100px 20px;
+    grid-template-columns: repeat(3, 1fr); /* Три карточки в одном ряду */
+    gap: 20px; /* Расстояние между карточками */
+    justify-content: center; /* Центрирование карточек по горизонтали */
+    max-width: 1200px; /* Ограничение ширины сетки */
+    margin: 20px auto; /* Выравнивание по центру страницы */
+    padding: 0 10px; /* Отступы от краев */
 }
 
-.product-card {
-    background: #fff;
+@media (max-width: 992px) {
+    .catalog-grid {
+        grid-template-columns: repeat(2, 1fr); /* Две карточки в ряду на планшетах */
+    }
+}
+
+@media (max-width: 768px) {
+    .catalog-grid {
+        grid-template-columns: repeat(1, 1fr); /* Одна карточка в ряду на мобильных */
+    }
+}
+
+
+.card {
+    width: 100%;
+    max-width: 300px; /* Ограничение ширины карточки */
     border: 1px solid #ddd;
     border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 200px; /* Фиксированная высота */
+    object-fit: cover; /* Сохранение пропорций */
+}
+
+.card-body {
+    padding: 15px;
     text-align: center;
 }
 
-.product-card img {
-    width: 100%;
-    height: auto;
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #FF3366;
+    margin-bottom: 10px;
 }
 
-.add-to-cart {
-    padding: 10px 20px;
+.card-text {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.card-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.btn {
     background-color: #FF3366;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
+    color: white;
+    border: none;
+}
+
+.btn:hover {
+    background-color: #e62e5a;
 }
 
 /* Регистрационная форма */
@@ -147,11 +193,12 @@ h1, h2, h3, p {
 
 @media (max-width: 768px) {
     .registration-form {
-        max-width: 100%; /* На мобильных устройствах занимает всю ширину */
-        padding: 30px; /* Снижает внутренний отступ */
+        max-width: 100%;
+        padding: 30px;
     }
 }
 
+/* Основное изображение */
 .main-image {
     position: relative;
     margin-top: 80px;
@@ -178,19 +225,17 @@ h1, h2, h3, p {
 .overlay h1 {
     font-size: 60px;
     margin: 0;
-    color: #FF3366; /* Розовый цвет текста */
-    text-shadow: 0 0 15px rgba(255, 223, 0, 0.8), 0 0 30px rgba(255, 223, 0, 0.5); /* Бледно-жёлтая подсветка */
-    animation: textGlow 1.5s ease-in-out infinite alternate; /* Анимация подсветки */
+    color: #FF3366;
+    text-shadow: 0 0 15px rgba(255, 223, 0, 0.8), 0 0 30px rgba(255, 223, 0, 0.5);
+    animation: textGlow 1.5s ease-in-out infinite alternate;
 }
 
 .overlay p {
     font-size: 30px;
     margin-top: 10px;
-    color: #FF3366; /* Розовый цвет текста */
-    text-shadow: 0 0 10px rgba(255, 223, 0, 0.8), 0 0 20px rgba(255, 223, 0, 0.5); /* Бледно-жёлтая подсветка */
+    color: #FF3366;
+    text-shadow: 0 0 10px rgba(255, 223, 0, 0.8), 0 0 20px rgba(255, 223, 0, 0.5);
 }
-
-
 
 @keyframes popFromDepth {
     0% {

@@ -18,6 +18,21 @@
         padding: 30px;
     }
 
+    .card-img-top {
+        height: 200px; /* Фиксированная высота изображений */
+        object-fit: cover; /* Обрезка изображений по размерам контейнера */
+        object-position: center; /* Центрирование изображений */
+    }
+
+    .card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    }
+
     .quantity-input {
         width: 60px;
         text-align: center;
@@ -105,7 +120,7 @@
 <footer class="footer bg-light py-3 text-center">
     <div class="container">
         <div class="social-icons">
-            <!-- Значки -->
+            <!-- Значки социальных сетей -->
         </div>
         <p>&copy; 2024 FlowersDelivery. Все права защищены.</p>
     </div>

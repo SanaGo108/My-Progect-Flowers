@@ -9,6 +9,7 @@
     <!-- Подключение глобальных стилей -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'admin/css/style.css' %}">
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 
     <style>
         @font-face {
@@ -46,7 +47,7 @@
             font-size: 36px;
             font-weight: bold;
             color: #FF3366;
-            margin-left: -140px; /* Сдвиг влево */
+            margin-left: -80px; /* Сдвиг влево */
         }
 
         .header a {
@@ -56,7 +57,7 @@
         }
 
         .header a:hover {
-            text-decoration: underline;
+            text-decoration: underline; !important;
         }
 
         .container {

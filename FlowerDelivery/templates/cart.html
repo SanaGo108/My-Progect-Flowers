@@ -1,8 +1,7 @@
 {% extends "base.html" %}
+{% load cart_filters %}
 
 {% block title %}Корзина{% endblock %}
-
-{% load cart_filters %}
 
 {% block content %}
 <div class="container" style="color: #FF3366;">
@@ -36,7 +35,32 @@
         <p>Ваша корзина пуста.</p>
     {% endif %}
 </div>
+
+<!-- Скрипт для работы с корзиной -->
 <script>
+    // Функция для добавления товара в корзину
+    function addToCart(productId, quantity) {
+        fetch('/add_to_cart/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}', // Токен CSRF для защиты
+            },
+            body: JSON.stringify({ product_id: productId, quantity: quantity }) // Передача данных
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.message);
+                location.reload(); // Перезагрузка страницы
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => console.error('Ошибка:', error));
+    }
+
+    // Обработчик удаления товаров из корзины
     document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.remove-item').forEach(button => {
             button.addEventListener('click', function () {
@@ -60,5 +84,10 @@
             });
         });
     });
+
+    // Пример вызова функции addToCart для добавления товара
+    // Здесь добавьте вызов addToCart с нужными параметрами при клике на кнопку "Добавить в корзину"
+    // Например:
+    // addToCart(1, 2); // Добавляет товар с ID 1 и количеством 2
 </script>
 {% endblock %}

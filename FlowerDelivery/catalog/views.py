@@ -29,6 +29,6 @@ def add_to_cart(request):
         return JsonResponse({"success": False, "message": "Некорректные данные."})
     return JsonResponse({"success": False, "message": "Только POST-запросы."})
 
-def cart_view(request):
-    # Здесь логика отображения корзины
-    return render(request, 'orders/cart.html', {})
+def cart(request):
+    return render(request, 'orders/cart.html', {'current_page': 'cart'})
+

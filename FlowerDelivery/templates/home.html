@@ -4,48 +4,52 @@
 
 {% block content %}
 <style>
-    /* Контейнер изображения */
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%; /* Устанавливаем 100% высоту для body и html */
+    }
+
     .main-image {
         position: relative;
         text-align: center;
         overflow: hidden;
+        height: 100vh; /* Высота экрана */
+        width: 100%; /* Ширина экрана */
+        background-image: url("https://sp-vestniksadovoda.ru/files/59d/59d7431a654905cba688ac322035c75c.jpg");
+        background-size: cover; /* Заполняем контейнер полностью, обрезая лишнее */
+        background-position: center; /* Центрируем изображение */
+        background-repeat: no-repeat; /* Избегаем повторения */
     }
 
-    .main-image img {
-        width: 100%;
-        height: auto;
-    }
 
-    /* Слой текста поверх изображения */
     .overlay {
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%) scale(0.8); /* Начальная позиция и масштаб */
-        opacity: 0; /* Начальная прозрачность */
+        transform: translate(-50%, -50%);
         text-align: center;
-        color: #FFD700; /* Бледно-желтый цвет текста */
+        color: #FFD700;
         font-family: 'Dancing Script', cursive;
-        animation: fadeInScale 2s ease-out forwards; /* Анимация появления текста */
+        animation: fadeInScale 2s ease-out forwards;
+        z-index: 1; /* Поверх изображения */
     }
 
     .overlay h1 {
-    font-size: 60px;
-    margin: 0;
-    color: #FF3366; /* Розовый цвет текста */
-    text-shadow: 0 0 15px rgba(255, 223, 0, 0.8), 0 0 30px rgba(255, 223, 0, 0.5); /* Бледно-жёлтая подсветка */
-    animation: textGlow 1.5s ease-in-out infinite alternate; /* Анимация подсветки */
+        font-size: 60px;
+        margin: 0;
+        color: #FF3366;
+        text-shadow: 0 0 15px rgba(255, 223, 0, 0.8), 0 0 30px rgba(255, 223, 0, 0.5);
+        animation: textGlow 1.5s ease-in-out infinite alternate;
     }
 
     .overlay p {
-    font-size: 30px;
-    margin-top: 10px;
-    color: #FF3366; /* Розовый цвет текста */
-    text-shadow: 0 0 10px rgba(255, 223, 0, 0.8), 0 0 20px rgba(255, 223, 0, 0.5); /* Бледно-жёлтая подсветка */
+        font-size: 30px;
+        margin-top: 10px;
+        color: #FF3366;
+        text-shadow: 0 0 10px rgba(255, 223, 0, 0.8), 0 0 20px rgba(255, 223, 0, 0.5);
     }
 
-
-    /* Анимация появления текста */
     @keyframes fadeInScale {
         0% {
             transform: translate(-50%, -50%) scale(0.8);
@@ -61,7 +65,6 @@
         }
     }
 
-    /* Анимация подсветки текста */
     @keyframes textGlow {
         0% {
             text-shadow: 0 0 10px rgba(255, 223, 0, 0.5), 0 0 20px rgba(255, 223, 0, 0.5);
@@ -73,7 +76,6 @@
 </style>
 
 <div class="main-image">
-    <img src="https://sp-vestniksadovoda.ru/files/59d/59d7431a654905cba688ac322035c75c.jpg" alt="Цветы">
     <div class="overlay">
         <h1>Гипермаркет цветов</h1>
         <p>Новая коллекция уже в продаже</p>

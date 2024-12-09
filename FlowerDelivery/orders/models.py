@@ -1,6 +1,6 @@
 from django.db import models
+from django.db.models import Sum, F
 from users.models import User
-from catalog.models import Product
 
 
 class Order(models.Model):
@@ -12,16 +12,27 @@ class Order(models.Model):
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders', verbose_name="Пользователь")
-    products = models.ManyToManyField(Product, through='OrderProduct', related_name='orders', verbose_name="Товары")
-    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Pending', verbose_name="Статус")
+    products = models.ManyToManyField(
+        'catalog.Product',  # Ленивый импорт
+        through='OrderProduct',
+        related_name='orders',
+        verbose_name="Товары"
+    )
+    status = models.CharField(
+        max_length=50, choices=STATUS_CHOICES, default='Pending', verbose_name="Статус"
+    )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, verbose_name="Общая сумма")
+    total_price = models.DecimalField(
+        max_digits=10, decimal_places=2, default=0.00, verbose_name="Общая сумма"
+    )
 
     def calculate_total_price(self):
         """
         Рассчитывает общую сумму заказа на основе продуктов.
         """
-        total = sum(item.product.price * item.quantity for item in self.order_products.all())
+        total = self.order_products.aggregate(
+            total=Sum(F('quantity') * F('product__price'))
+        )['total'] or 0
         self.total_price = total
         self.save()
 
@@ -40,7 +51,9 @@ class OrderProduct(models.Model):
     с учетом количества продуктов в заказе.
     """
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_products')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='order_products')
+    product = models.ForeignKey(
+        'catalog.Product', on_delete=models.CASCADE, related_name='order_products'
+    )  # Ленивый импорт
     quantity = models.PositiveIntegerField(default=1, verbose_name="Количество")
 
     def __str__(self):
@@ -58,6 +71,10 @@ class Cart(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='cart')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
 
+    @property
+    def items(self):
+        return self.cart_items.all()
+
     def __str__(self):
         return f"Cart for {self.user.username}"
 
@@ -66,8 +83,10 @@ class CartItem(models.Model):
     """
     Модель товара в корзине.
     """
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items', verbose_name="Корзина")
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Продукт")
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='cart_items', verbose_name="Корзина")
+    product = models.ForeignKey(
+        'catalog.Product', on_delete=models.CASCADE, verbose_name="Продукт"
+    )  # Ленивый импорт
     quantity = models.PositiveIntegerField(default=1, verbose_name="Количество")
 
     def __str__(self):
@@ -76,4 +95,3 @@ class CartItem(models.Model):
     class Meta:
         verbose_name = "Товар в корзине"
         verbose_name_plural = "Товары в корзине"
-
